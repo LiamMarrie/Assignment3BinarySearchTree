@@ -2,69 +2,61 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.beans.Transient;
-
-import org.junit.before;
+import org.junit.Before;
 import org.junit.Test;
+import java.util.Iterator;
 
 public class BSTreeTest {
-    private BSTree<integer> bst;
+    private BSTree<Integer> bst;
 
     @Before
     public void setUp() {
-        // int a new bst before each test
+        // initialize a new BST before each test
         bst = new BSTree<>();
     }
 
     @Test
-    public void testInsert() {
-        // test inserting elements into the bst
-        bst.insert(5);
-        bst.insert(3);
-        bst.insert(7);
+    public void testAdd() {
+        bst.add(5);
+        bst.add(3);
+        bst.add(7);
 
-        // assert size of tree and check root and its children
         assertEquals(3, bst.size());
-        assertEquals(5, bst.getRoot().getData());
-        assertEquals(3, bst.getRoot().getLeft().getData());
-        assertEquals(7, bst.getRoot().getRight().getData());
+        assertEquals(Integer.valueOf(5), bst.getRoot().getData());
+        assertEquals(Integer.valueOf(3), bst.getRoot().getLeft().getData());
+        assertEquals(Integer.valueOf(7), bst.getRoot().getRight().getData());
     }
 
     @Test
-    public void testDelete() {
-        // test deleting elements from the bst
-        bst.insert(5);
-        bst.insert(3);
-        bst.insert(7);
-        bst.insert(2);
-        bst.insert(4);
-        bst.insert(6);
-        bst.insert(8);
+    public void testRemove() {
+        bst.add(5);
+        bst.add(3);
+        bst.add(7);
+        bst.add(2);
+        bst.add(4);
+        bst.add(6);
+        bst.add(8);
 
-        // delete leaf node
-        bst.delete(2);
+        bst.remove(2);
         assertEquals(6, bst.size());
         assertNull(bst.getRoot().getLeft().getLeft());
 
-        // delete node with one child
-        bst.delete(7);
+        bst.remove(7);
         assertEquals(5, bst.size());
-        assertEquals(8, bst.getRoot().getRight().getData());
+        assertEquals(Integer.valueOf(8), bst.getRoot().getRight().getData());
 
-        // delete node with two children
-        bst.delete(3);
+        bst.remove(3);
         assertEquals(4, bst.size());
-        assertEquals(4, bst.getRoot().getLeft().getData());
+        assertEquals(Integer.valueOf(4), bst.getRoot().getLeft().getData());
     }
 
     @Test
-    public void testIterator() {
-        // test iterator for in-order traversal
-        bst.insert(5);
-        bst.insert(3);
-        bst.insert(7);
+    public void testInorderIterator() {
+        bst.add(5);
+        bst.add(3);
+        bst.add(7);
 
-        Iterator<Integer> iterator = bst.iterator();
+        Iterator<Integer> iterator = bst.inorderIterator();
         assertTrue(iterator.hasNext());
         assertEquals(Integer.valueOf(3), iterator.next());
         assertTrue(iterator.hasNext());

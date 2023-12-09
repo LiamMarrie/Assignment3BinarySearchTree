@@ -24,7 +24,7 @@ public class BSTreeNode<E extends Comparable<? super E>> {
     }
 
     public BSTreeNode<E> getRight() {
-        return this.right;
+        return right;
     }
 
     public void setRight(BSTreeNode<E> right) {

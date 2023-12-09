@@ -1,7 +1,7 @@
 /**
  * BSTreeADT
  */
-package utilities;
+package A3;
 
 import treeImplementation.BSTreeNode;
 
